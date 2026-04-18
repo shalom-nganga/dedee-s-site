@@ -56,19 +56,6 @@
     border-bottom: 1px solid rgba(196,98,45,0.1);
   }
 
-  .nav-logo {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--brown-deep);
-    letter-spacing: 0.02em;
-  }
-
-  .nav-logo em {
-    font-style: italic;
-    color: var(--terra);
-  }
-
   .nav-links {
     display: flex;
     gap: 36px;
@@ -769,8 +756,6 @@
     .org-strip-divider { width: 36px; height: 1px; }
     .org-strip-logos { flex-direction: column; gap: 20px; }
   }
-
-  .btn-cv {
     background: transparent;
     color: var(--brown-mid);
     padding: 14px 20px;
@@ -971,6 +956,20 @@
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+  /* NAV LOGO ANIMATION */
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--brown-deep);
+    letter-spacing: 0.02em;
+    animation: fadeUp 0.6s ease both;
+  }
+  .nav-logo em {
+    font-style: italic;
+    color: var(--terra);
+  }
+
   /* ── TABLET (max 900px) ── */
   @media (max-width: 900px) {
     /* Nav */
@@ -987,21 +986,72 @@
       justify-content: center;
       gap: 36px;
       z-index: 150;
+      list-style: none;
     }
     .nav-links.open { display: flex; }
-    .nav-links a { font-size: 20px; letter-spacing: 0.1em; }
+    .nav-links a { font-size: 22px; letter-spacing: 0.1em; color: var(--brown-deep); }
 
-    /* Hero */
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 110px 24px 48px; }
+    /* Hero — text first, photo below */
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-left {
+      padding: 100px 24px 32px;
+      z-index: 2;
+    }
+    .hero-tag {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
     .hero-name { font-size: clamp(44px, 12vw, 72px); }
     .hero-desc { font-size: 15px; }
     .hero-ctas { flex-wrap: wrap; gap: 12px; }
     .btn-primary, .btn-outline, .btn-cv { padding: 13px 24px; font-size: 11px; }
-    .hero-right { height: 340px; }
-    .hero-bg-shape { clip-path: none; }
-    .hero-portrait { width: 180px; height: 240px; }
-    .hero-stats { max-width: 280px; }
+
+    /* Hero right — photo panel below text */
+    .hero-right {
+      height: 320px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-shape {
+      clip-path: none;
+      position: absolute;
+      inset: 0;
+      background: var(--terra-pale);
+    }
+    .hero-visual {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 16px;
+      padding: 16px 24px 0;
+    }
+    .hero-portrait {
+      width: 180px;
+      height: 270px;
+      flex-shrink: 0;
+      box-shadow: 10px 10px 0 rgba(196,98,45,0.15), 10px 10px 0 1.5px var(--terra);
+    }
+    .hero-stats {
+      max-width: 110px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-bottom: 16px;
+      width: 100%;
+    }
+    .hero-stats .stat { padding: 10px 8px; }
+    .stat-num { font-size: 20px; }
+    .stat-label { font-size: 9px; }
     .scroll-hint { display: none; }
 
     /* Sections */
@@ -1047,18 +1097,16 @@
   /* ── MOBILE (max 480px) ── */
   @media (max-width: 480px) {
     nav { padding: 16px 20px; }
-    .nav-logo { font-size: 15px; }
 
-    .hero-left { padding: 100px 20px 40px; }
+    .hero-right { height: 320px; }
+    .hero-portrait { width: 160px; height: 230px; }
+    .hero-stats { max-width: 100px; }
+
+    .hero-left { padding: 32px 20px 52px; }
     .hero-name { font-size: clamp(40px, 13vw, 60px); }
     .hero-desc { font-size: 14px; max-width: 100%; }
-    .hero-ctas { flex-direction: column; align-items: flex-start; }
+    .hero-ctas { flex-direction: column; align-items: stretch; }
     .btn-primary, .btn-outline, .btn-cv { width: 100%; text-align: center; justify-content: center; }
-    .hero-right { height: 280px; }
-    .hero-portrait { width: 150px; height: 200px; }
-    .hero-stats { max-width: 240px; gap: 10px; }
-    .stat-num { font-size: 22px; }
-    .stat-label { font-size: 9px; }
 
     section { padding: 52px 20px; }
     .section-title { font-size: clamp(26px, 9vw, 38px); }
@@ -1081,7 +1129,8 @@
 
     .contact { padding: 52px 20px; }
     .contact-form { padding: 24px 16px; }
-    .form-input, .form-select, .form-textarea { font-size: 16px; } /* prevents iOS zoom */
+    /* Prevents iOS auto-zoom on input focus */
+    .form-input, .form-select, .form-textarea { font-size: 16px; }
 
     .org-strip { padding: 28px 20px; }
     .org-strip-logos { gap: 16px; }
@@ -1105,7 +1154,7 @@
     <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
     <li><a href="#values" onclick="closeMenu()">Values</a></li>
     <li><a href="#education" onclick="closeMenu()">Education</a></li>
-    <li><a href="#testimonials" onclick="closeMenu()">Testimonials</a></li>
+    <!-- <li><a href="#testimonials" onclick="closeMenu()">Testimonials</a></li> -->
     <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
   </ul>
 </nav>
@@ -1124,7 +1173,7 @@
     <div class="hero-ctas">
       <a href="#experience" class="btn-primary">View My Work</a>
       <a href="#contact" class="btn-outline">Get In Touch</a>
-      <a href="#" class="btn-cv" onclick="alert('CV coming soon — check back shortly!'); return false;">⬇ Download CV</a>
+      <!-- <a href="#" class="btn-cv" onclick="alert('CV coming soon — check back shortly!'); return false;">⬇ Download CV</a> -->
     </div>
     <div class="scroll-hint">
       <span class="scroll-line"></span>
@@ -1233,25 +1282,25 @@
   <div class="org-strip-logos">
     <a href="https://dadapower.org" target="_blank" class="org-logo-item">
       <img src="https://dadapower.org/wp-content/uploads/2024/10/logo.png" alt="DadaPower Initiative" style="height:36px; width:auto; object-fit:contain; filter: brightness(0) invert(1); opacity:0.85;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-      <div class="org-logo-icon" style="display:none;">💜</div>
+      <!-- <div class="org-logo-icon" style="display:none;">💜</div> -->
       <div class="org-logo-name">DadaPower Initiative</div>
       <div class="org-logo-sub">dadapower.org</div>
     </a>
     <div class="org-strip-divider"></div>
     <a href="https://kgga.co.ke" target="_blank" class="org-logo-item">
-      <div class="org-logo-icon">⚜️</div>
+      <!-- <div class="org-logo-icon">⚜️</div> -->
       <div class="org-logo-name">Kenya Girl Guides Association</div>
-      <div class="org-logo-sub">kgga.co.ke</div>
+      <!-- <div class="org-logo-sub">kgga.co.ke</div> -->
     </a>
     <div class="org-strip-divider"></div>
     <a href="#" class="org-logo-item">
-      <div class="org-logo-icon">🤝</div>
+      <!-- <div class="org-logo-icon">🤝</div> -->
       <div class="org-logo-name">Prospective Care & Support</div>
       <div class="org-logo-sub">Nairobi, Kenya</div>
     </a>
     <div class="org-strip-divider"></div>
     <a href="https://www.mkueducation.com" target="_blank" class="org-logo-item">
-      <div class="org-logo-icon">🎓</div>
+      <!-- <div class="org-logo-icon">🎓</div> -->
       <div class="org-logo-name">Mount Kenya University</div>
       <div class="org-logo-sub">mkueducation.com</div>
     </a>
@@ -1307,7 +1356,7 @@
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials reveal" id="testimonials">
+<!-- <section class="testimonials reveal" id="testimonials">
   <div class="testimonials-header">
     <div class="section-tag">Testimonials</div>
     <h2 class="section-title">What people <em>say</em></h2>
@@ -1332,7 +1381,7 @@
       <p class="testi-placeholder-text">More testimonials coming soon — currently gathering references from colleagues and supervisors.</p>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- CONTACT -->
 <section class="contact reveal" id="contact">
