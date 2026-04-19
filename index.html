@@ -944,6 +944,7 @@
     background: none;
     border: none;
     z-index: 200;
+    position: relative;
   }
   .hamburger span {
     display: block;
@@ -980,17 +981,23 @@
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(250,244,237,0.98);
-      backdrop-filter: blur(16px);
+      background: var(--cream);
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 36px;
       z-index: 150;
       list-style: none;
+      border-bottom: none;
     }
     .nav-links.open { display: flex; }
-    .nav-links a { font-size: 22px; letter-spacing: 0.1em; color: var(--brown-deep); }
+    .nav-links a {
+      font-size: 22px;
+      letter-spacing: 0.1em;
+      color: var(--brown-deep);
+      font-weight: 400;
+    }
+    .nav-links a:hover { color: var(--terra); }
 
     /* Hero — text first, photo below */
     .hero {
@@ -1087,9 +1094,30 @@
     .contact-form { padding: 28px 20px; }
 
     /* Org strip */
-    .org-strip { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 20px; }
-    .org-strip-logos { flex-direction: row; flex-wrap: wrap; gap: 20px; }
+    .org-strip {
+      padding: 32px 24px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .org-strip-label { font-size: 10px; }
+    .org-strip-logos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+    }
     .org-strip-divider { display: none; }
+    .org-logo-item {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 14px 12px;
+      gap: 6px;
+    }
+    .org-logo-icon { font-size: 20px; }
+    .org-logo-name { font-size: 11px; white-space: normal; line-height: 1.3; }
+    .org-logo-sub { font-size: 10px; }
 
     /* Footer */
     footer { flex-direction: column; gap: 10px; text-align: center; padding: 28px 24px; }
@@ -1155,7 +1183,7 @@
     <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
     <li><a href="#values" onclick="closeMenu()">Values</a></li>
     <li><a href="#education" onclick="closeMenu()">Education</a></li>
-    <!-- <li><a href="#testimonials" onclick="closeMenu()">Testimonials</a></li> -->
+    <li><a href="#testimonials" onclick="closeMenu()">Testimonials</a></li>
     <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
   </ul>
 </nav>
@@ -1174,7 +1202,7 @@
     <div class="hero-ctas">
       <a href="#experience" class="btn-primary">View My Work</a>
       <a href="#contact" class="btn-outline">Get In Touch</a>
-      <!-- <a href="#" class="btn-cv" onclick="alert('CV coming soon — check back shortly!'); return false;">⬇ Download CV</a> -->
+      <a href="#" class="btn-cv" onclick="alert('CV coming soon — check back shortly!'); return false;">⬇ Download CV</a>
     </div>
     <div class="scroll-hint">
       <span class="scroll-line"></span>
@@ -1283,25 +1311,25 @@
   <div class="org-strip-logos">
     <a href="https://dadapower.org" target="_blank" class="org-logo-item">
       <img src="https://dadapower.org/wp-content/uploads/2024/10/logo.png" alt="DadaPower Initiative" style="height:36px; width:auto; object-fit:contain; filter: brightness(0) invert(1); opacity:0.85;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-      <!-- <div class="org-logo-icon" style="display:none;">💜</div> -->
+      <div class="org-logo-icon" style="display:none;">💜</div>
       <div class="org-logo-name">DadaPower Initiative</div>
       <div class="org-logo-sub">dadapower.org</div>
     </a>
     <div class="org-strip-divider"></div>
     <a href="https://kgga.co.ke" target="_blank" class="org-logo-item">
-      <!-- <div class="org-logo-icon">⚜️</div> -->
+      <div class="org-logo-icon">⚜️</div>
       <div class="org-logo-name">Kenya Girl Guides Association</div>
-      <!-- <div class="org-logo-sub">kgga.co.ke</div> -->
+      <div class="org-logo-sub">kgga.co.ke</div>
     </a>
     <div class="org-strip-divider"></div>
     <a href="#" class="org-logo-item">
-      <!-- <div class="org-logo-icon">🤝</div> -->
+      <div class="org-logo-icon">🤝</div>
       <div class="org-logo-name">Prospective Care & Support</div>
       <div class="org-logo-sub">Nairobi, Kenya</div>
     </a>
     <div class="org-strip-divider"></div>
     <a href="https://www.mkueducation.com" target="_blank" class="org-logo-item">
-      <!-- <div class="org-logo-icon">🎓</div> -->
+      <div class="org-logo-icon">🎓</div>
       <div class="org-logo-name">Mount Kenya University</div>
       <div class="org-logo-sub">mkueducation.com</div>
     </a>
