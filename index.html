@@ -42,7 +42,6 @@
     opacity: 0.5;
   }
 
-  /* NAV */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -756,7 +755,6 @@
     .org-strip-divider { width: 36px; height: 1px; }
     .org-strip-logos { flex-direction: column; gap: 20px; }
   }
-  .btn-cv {
     background: transparent;
     color: var(--brown-mid);
     padding: 14px 20px;
@@ -837,12 +835,13 @@
   .contact { background: var(--cream); padding: 100px 60px; }
   .contact-inner {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 80px;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
     align-items: start;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
   }
+  .contact-info { min-width: 0; }
   .contact-info .section-tag { margin-bottom: 16px; }
   .contact-info .section-title { margin-bottom: 20px; }
   .contact-sub {
@@ -934,7 +933,32 @@
     margin-top: 16px;
     text-align: center;
   }
-  /* ── HAMBURGER MENU ── */
+  .nav-overlay-header {
+    display: none;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 0.5px solid var(--sand-dark);
+    margin-bottom: 8px;
+  }
+  .nav-overlay-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--brown-deep);
+  }
+  .nav-overlay-logo em { font-style: italic; color: var(--terra); }
+  .nav-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--brown-mid);
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+  .nav-close:hover { color: var(--terra); }
   .hamburger {
     display: none;
     flex-direction: column;
@@ -977,27 +1001,42 @@
     /* Nav */
     nav { padding: 18px 24px; }
     .hamburger { display: flex; }
+    /* NAV OVERLAY - complete fix */
     .nav-links {
       display: none;
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: var(--cream);
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #faf4ed;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 36px;
-      z-index: 150;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 80px 32px 40px;
+      gap: 0;
+      z-index: 9999;
       list-style: none;
-      border-bottom: none;
+      overflow-y: auto;
     }
     .nav-links.open { display: flex; }
-    .nav-links a {
-      font-size: 22px;
-      letter-spacing: 0.1em;
-      color: var(--brown-deep);
-      font-weight: 400;
+    .nav-links.open .nav-overlay-header { display: flex; }
+    .nav-links li {
+      width: 100%;
+      border-bottom: 0.5px solid #d4c0a8;
     }
-    .nav-links a:hover { color: var(--terra); }
+    .nav-links a {
+      display: block;
+      font-size: 17px;
+      letter-spacing: 0.04em;
+      color: #2c1810;
+      font-weight: 400;
+      padding: 16px 0;
+      font-family: 'Jost', sans-serif;
+      text-transform: none;
+      text-decoration: none;
+    }
+    .hamburger { z-index: 10000; position: relative; }
 
     /* Hero — text first, photo below */
     .hero {
@@ -1179,11 +1218,15 @@
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="nav-links">
+    <div class="nav-overlay-header">
+      <div class="nav-overlay-logo">Dorrin <em>Macharia</em></div>
+      <button class="nav-close" onclick="closeMenu()">✕</button>
+    </div>
     <li><a href="#about" onclick="closeMenu()">About</a></li>
     <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
     <li><a href="#values" onclick="closeMenu()">Values</a></li>
     <li><a href="#education" onclick="closeMenu()">Education</a></li>
-    <!-- <li><a href="#testimonials" onclick="closeMenu()">Testimonials</a></li> -->
+    <li><a href="#testimonials" onclick="closeMenu()">Testimonials</a></li>
     <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
   </ul>
 </nav>
@@ -1202,7 +1245,7 @@
     <div class="hero-ctas">
       <a href="#experience" class="btn-primary">View My Work</a>
       <a href="#contact" class="btn-outline">Get In Touch</a>
-      <!-- <a href="#" class="btn-cv" onclick="alert('CV coming soon — check back shortly!'); return false;">⬇ Download CV</a> -->
+      <a href="#" class="btn-cv" onclick="alert('CV coming soon — check back shortly!'); return false;">⬇ Download CV</a>
     </div>
     <div class="scroll-hint">
       <span class="scroll-line"></span>
@@ -1323,15 +1366,15 @@
     </a>
     <div class="org-strip-divider"></div>
     <a href="#" class="org-logo-item">
-      <!-- <div class="org-logo-icon">🤝</div> -->
+      <div class="org-logo-icon">🤝</div>
       <div class="org-logo-name">Prospective Care & Support</div>
       <div class="org-logo-sub">Nairobi, Kenya</div>
     </a>
     <div class="org-strip-divider"></div>
-    <a href="https://mku.ac.ke/" target="_blank" class="org-logo-item">
-      <!-- <div class="org-logo-icon">🎓</div> -->
+    <a href="https://www.mkueducation.com" target="_blank" class="org-logo-item">
+      <div class="org-logo-icon">🎓</div>
       <div class="org-logo-name">Mount Kenya University</div>
-      <div class="org-logo-sub">mku.ac.ke</div>
+      <div class="org-logo-sub">mkueducation.com</div>
     </a>
   </div>
 </div>
@@ -1379,13 +1422,13 @@
       Currently pursuing a Bachelor of Arts in Social Work at Mount Kenya University, where theory meets real-world practice. The programme equips me with the skills to assess, advocate, and support individuals and communities effectively.
     </p>
     <p>
-      Alongside my studies, I apply my learning directly through internships and fellowships, turning classroom knowledge into tangible community impact across Nairobi & the other parts pf the world.
+      Alongside my studies, I apply my learning directly through internships and fellowships — turning classroom knowledge into tangible community impact across Nairobi.
     </p>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<!-- <section class="testimonials reveal" id="testimonials">
+<section class="testimonials reveal" id="testimonials">
   <div class="testimonials-header">
     <div class="section-tag">Testimonials</div>
     <h2 class="section-title">What people <em>say</em></h2>
@@ -1410,7 +1453,7 @@
       <p class="testi-placeholder-text">More testimonials coming soon — currently gathering references from colleagues and supervisors.</p>
     </div>
   </div>
-</section> -->
+</section>
 
 <!-- CONTACT -->
 <section class="contact reveal" id="contact">
@@ -1433,10 +1476,10 @@
         <div class="contact-detail-icon">📍</div>
         Nairobi, Kenya
       </a>
-      <!-- <div style="margin-top: 32px;">
+      <div style="margin-top: 32px;">
         <a href="#" onclick="alert('CV coming soon — check back shortly!'); return false;" class="btn-primary" style="display:inline-flex; align-items:center; gap:8px;">
           ⬇ Download CV
-        </a> -->
+        </a>
       </div>
     </div>
     <div class="contact-form">
